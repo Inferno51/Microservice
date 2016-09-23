@@ -6,6 +6,7 @@ public class CurrentObservation {
     private String relative_humidity;
     private String wind_dir;
     private Double wind_mph;
+    private String icon;
     
     public CurrentObservation() {
         // TODO Auto-generated constructor stub
@@ -43,6 +44,12 @@ public class CurrentObservation {
     }
     public void setWind_mph(Double wind_mph) {
         this.wind_mph = wind_mph;
+    }
+    public String getIcon() {
+        return icon;
+    }
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
     
 }

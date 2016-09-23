@@ -5,32 +5,52 @@
 <meta charset="UTF-8">
 <link rel="stylesheet"
 </head>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 		h1{
-			background:grey;
+			background: teal;
 			padding: 2em;
 			font-size: 3em;
+			font-family: sans-serif;
+			border:2px ridge black;
 			
 		}
+		#weatherList{
+		padding:1em;
+	    border:2px ridge black;
+		
+		}
 		#weatherList li{
-		width:50%;
 		padding:1em;
 		list-style:none;
+		font-family: sans-serif;
+		border: activeborder;
 		}
 		#weatherList li:nth-Child(odd){
-		  background: #99ccff;
+		  background: #80ffff;
+		  background: -webkit-linear-gradient(45deg, #80ffff, teal);
+          /* For Safari 5.1 to 6.0 */
+       	  background: -o-linear-gradient(45deg, #80ffff, teal);
+       	  /* For Opera 11.1 to 12.0 */
+          background: -moz-linear-gradient(45deg, #80ffff, teal);
+          /* For Firefox 3.6 to 15 */
+          background: linear-gradient(45deg, #80ffff, teal);
+          /* Standard syntax */
+        
 		}
 		
 		#weatherList li:nth-Child(even){
-        background: white;
-        background: -webkit-linear-gradient(45deg, white, #99ccff);
+        background: #e6ffff;
+        background: -webkit-linear-gradient(45deg, #e6ffff, teal);
         /* For Safari 5.1 to 6.0 */
-        background: -o-linear-gradient(45deg, white, #99ccff);
+        background: -o-linear-gradient(45deg, #e6ffff, teal);
         /* For Opera 11.1 to 12.0 */
-        background: -moz-linear-gradient(45deg, white, #99ccff);
+        background: -moz-linear-gradient(45deg, #e6ffff, teal);
         /* For Firefox 3.6 to 15 */
-        background: linear-gradient(45deg, white, #99ccff);
+        background: linear-gradient(45deg, #e6ffff, #80ffff);
         /* Standard syntax */
         
     }
@@ -39,36 +59,74 @@
         background: silver;
     }
     
+    #weatherForm {
+    	background: teal;
+    	font-family: sans-serif;
+        border:2px ridge black;
+    	
+    }
+    
     #weatherForm label{
-    	background: grey;
     	padding: 1em;
-    	font-size: 1em;
+    	font-size: 1.5em;
     	
     }
       #weatherForm input{
-    	background: white;
+    	background: #e6ffff;
     	padding: 1em;
     	font-size: 1em;
+    	margin:1em;
+    	
+    }
+     #weatherForm input:focus{
+    	border:4px solid #00ffff;    	    	
+    }
+    
+    #weatherForm #submit{
+    	font-family: sans-serif;
+    	background: #66ffff;
+    	padding: 1em;
+    	margin: 1em;
+    	border: 2px solid black;
+    	border-radius: 1em;
+    }
+    
+    #weatherForm #submit:hover{
+    	background: #1affff;
     }
 </style>
 <body ng-controller="WeatherController as WC">
-	<h1>Weather App</h1>
-	<form ng-submit="WC.getWeather()" id="weatherForm">
-		<label for="state">State:</label>
-		<input id="state" type="text" ng-model="WC.state" value="" >
-		<label for="city">City:</label>
-		<input id="city" type="text" ng-model="WC.city" value="" >
-		<input type="submit" ng-disabled="! WC.city && !WC.state" value="Get Weather">
+	<h1 class="col-sm-offset-3 col-sm-6">Weather App</h1>
+	<form class="col-sm-offset-3 col-sm-6" ng-submit="WC.getWeather()" id="weatherForm">
+		<label class="col-sm-12" for="city">City:</label>
+		<input class="col-sm-12" id="city" type="text" ng-model="WC.city" value="" >
+		<label class="col-sm-12" for="state">State:</label>
+		<input class="col-sm-12" id="state" type="text" ng-model="WC.state" value="" >
+		<input class="col-sm-12" type="submit" ng-disabled="! WC.city && !WC.state" id="submit" value="Click for Weather">
 	</form>
-	<ul id="weatherList" ng-hide="! WC.weather.success.current_observation.weather">
-		<li>Weather: {{WC.weather.success.current_observation.weather}}</li>
-		<li>Temperature: {{WC.weather.success.current_observation.temp_f}}</li>
-		<li>Humidity: {{WC.weather.success.current_observation.relative_humidity}}</li>
-		<li>Wind Direction: {{WC.weather.success.current_observation.wind_dir}}</li>
-		<li>Wind Speed: {{WC.weather.success.current_observation.wind_mph}}</li>
+	<div class="col-sm-offset-3 col-sm-6" ng-hide="! WC.weather.success.current_observation.weather" style="padding:1em; background:grey;" >
+	<ul id="weatherList" >
+		<li>Place:</li>
+		<li>{{WC.city}},{{WC.state}}</li>
+		
+		<li>Weather:</li>
+		<li>{{WC.weather.success.current_observation.weather}}{{WC.weather.success.current_observation}}</li>
+		
+		<li>Temperature:</li>
+		<li>{{WC.weather.success.current_observation.temp_f}}F</li>
+		
+		<li>Humidity:</li>
+		<li>{{WC.weather.success.current_observation.relative_humidity}}</li>
+
+		<li>Wind Direction:</li>
+		<li>{{WC.weather.success.current_observation.wind_dir}}</li>
+		
+		
+		<li>Wind Speed:</li>
+		<li>{{WC.weather.success.current_observation.wind_mph}} mph</li>
+		
 	</ul>
-    
-      
+    </div>
 		<script src="./angular.min.js"></script>
         <script type="text/javascript">
         angular.module('Weather',[]).controller("WeatherController", function ($http){
