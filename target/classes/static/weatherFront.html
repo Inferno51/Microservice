@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html ng-app ="Weather">
+<head>
+<title>Weather</title>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+</head>
+
+<style>
+		h1{
+			background:grey;
+			padding: 2em;
+			font-size: 3em;
+			
+		}
+		#weatherList li{
+		width:50%;
+		padding:1em;
+		list-style:none;
+		}
+		#weatherList li:nth-Child(odd){
+		  background: #99ccff;
+		}
+		
+		#weatherList li:nth-Child(even){
+        background: white;
+        background: -webkit-linear-gradient(45deg, white, #99ccff);
+        /* For Safari 5.1 to 6.0 */
+        background: -o-linear-gradient(45deg, white, #99ccff);
+        /* For Opera 11.1 to 12.0 */
+        background: -moz-linear-gradient(45deg, white, #99ccff);
+        /* For Firefox 3.6 to 15 */
+        background: linear-gradient(45deg, white, #99ccff);
+        /* Standard syntax */
+        
+    }
+    
+    body {
+        background: silver;
+    }
+    
+    #weatherForm label{
+    	background: grey;
+    	padding: 1em;
+    	font-size: 1em;
+    	
+    }
+      #weatherForm input{
+    	background: white;
+    	padding: 1em;
+    	font-size: 1em;
+    }
+</style>
+<body ng-controller="WeatherController as WC">
+	<h1>Weather App</h1>
+	<form ng-submit="WC.getWeather()" id="weatherForm">
+		<label for="state">State:</label>
+		<input id="state" type="text" ng-model="WC.state" value="" >
+		<label for="city">City:</label>
+		<input id="city" type="text" ng-model="WC.city" value="" >
+		<input type="submit" ng-disabled="! WC.city && !WC.state" value="Get Weather">
+	</form>
+	<ul id="weatherList" ng-hide="! WC.weather.success.current_observation.weather">
+		<li>Weather: {{WC.weather.success.current_observation.weather}}</li>
+		<li>Temperature: {{WC.weather.success.current_observation.temp_f}}</li>
+		<li>Humidity: {{WC.weather.success.current_observation.relative_humidity}}</li>
+		<li>Wind Direction: {{WC.weather.success.current_observation.wind_dir}}</li>
+		<li>Wind Speed: {{WC.weather.success.current_observation.wind_mph}}</li>
+	</ul>
+    
+      
+		<script src="./angular.min.js"></script>
+        <script type="text/javascript">
+        angular.module('Weather',[]).controller("WeatherController", function ($http){
+        	
+        	this.weather=[];
+        	this.state = "MD";
+			this.city = "Columbia";
+        	this.getWeather = function (){
+        		var self = this;
+        		$http.get('weather/local/'+ self.state + '/'+ self.city).then(function (response)
+        		{
+        			console.log(self);
+        			self.weather = response.data;
+        			console.log(self.weather.success.current_observation);
+        		
+        		})
+        	};
+        	
+        });
+        </script>
+    
+    </body>
+</html>
+
+
+</body>
+</html>
