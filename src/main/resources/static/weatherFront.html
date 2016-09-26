@@ -102,9 +102,9 @@
 		<input class="col-sm-12" id="city" type="text" ng-model="WC.city" value="" >
 		<label class="col-sm-12" for="state">State:</label>
 		<input class="col-sm-12" id="state" type="text" ng-model="WC.state" value="" >
-		<input class="col-sm-12" type="submit" ng-disabled="! WC.city && !WC.state" id="submit" value="Click for Weather">
+		<input class="col-sm-12" type="submit" ng-disabled="! (WC.city && WC.state)" id="submit" value="Click for Weather">
 	</form>
-	<div ng-show="WC.load">Loading...</div>
+	<div class= "col-sm-offset-3 col-sm-6" ng-show="WC.load">Loading...</div>
 	<div class="col-sm-offset-3 col-sm-6" ng-hide="! WC.weather.success.current_observation.weather" style="padding:1em; background:grey;" >
 	<ul id="weatherList" >
 		<li>Place:</li>
@@ -114,7 +114,7 @@
 		<li>{{WC.weather.success.current_observation.weather}}</li>
 		
 		<li>Temperature:</li>
-		<li>{{WC.weather.success.current_observation.temp_f}}F</li>
+		<li>{{WC.weather.success.current_observation.temp_f}} F</li>
 		
 		<li>Humidity:</li>
 		<li>{{WC.weather.success.current_observation.relative_humidity}}</li>
@@ -137,8 +137,9 @@
 			controller.city = "Columbia";
 			controller.load=false;
         	controller.getWeather = function (){
-        		controller.load= true;
-        		$http.get('weather/local/'+ controller.state + '/'+ controller.city).then(function (response)
+        	controller.load= true;
+        	
+        	$http.get('weather/local/'+ controller.state + '/'+ controller.city).then(function (response)
         		{
         			console.log(controller);
         			controller.weather = response.data;
