@@ -104,13 +104,14 @@
 		<input class="col-sm-12" id="state" type="text" ng-model="WC.state" value="" >
 		<input class="col-sm-12" type="submit" ng-disabled="! WC.city && !WC.state" id="submit" value="Click for Weather">
 	</form>
+	<div ng-show="WC.load">Loading...</div>
 	<div class="col-sm-offset-3 col-sm-6" ng-hide="! WC.weather.success.current_observation.weather" style="padding:1em; background:grey;" >
 	<ul id="weatherList" >
 		<li>Place:</li>
 		<li>{{WC.city}},{{WC.state}}</li>
 		
 		<li>Weather:</li>
-		<li>{{WC.weather.success.current_observation.weather}}{{WC.weather.success.current_observation}}</li>
+		<li>{{WC.weather.success.current_observation.weather}}</li>
 		
 		<li>Temperature:</li>
 		<li>{{WC.weather.success.current_observation.temp_f}}F</li>
@@ -130,17 +131,19 @@
 		<script src="./angular.min.js"></script>
         <script type="text/javascript">
         angular.module('Weather',[]).controller("WeatherController", function ($http){
-        	
-        	this.weather=[];
-        	this.state = "MD";
-			this.city = "Columbia";
-        	this.getWeather = function (){
-        		var self = this;
-        		$http.get('weather/local/'+ self.state + '/'+ self.city).then(function (response)
+        	var controller= this;
+        	controller.weather=[];
+        	controller.state = "MD";
+			controller.city = "Columbia";
+			controller.load=false;
+        	controller.getWeather = function (){
+        		controller.load= true;
+        		$http.get('weather/local/'+ controller.state + '/'+ controller.city).then(function (response)
         		{
-        			console.log(self);
-        			self.weather = response.data;
-        			console.log(self.weather.success.current_observation);
+        			console.log(controller);
+        			controller.weather = response.data;
+        			console.log(controller.weather.success.current_observation);
+        			controller.load=false;
         		
         		})
         	};

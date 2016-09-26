@@ -153,3 +153,8 @@
 13:52:47.957} [main] DEBUG com.ssa.ironyard.WeatherStarter - Running with Spring Boot v1.4.0.RELEASE, Spring v4.3.2.RELEASE
 13:52:47.957} [main] INFO  com.ssa.ironyard.WeatherStarter - No active profile set, falling back to default profiles: default
 13:52:50.087} [main] INFO  com.ssa.ironyard.WeatherStarter - Started WeatherStarter in 2.375 seconds (JVM running for 4.906)
+08:54:59.994} [main] INFO  com.ssa.ironyard.WeatherStarter - Starting microservice
+08:55:00.339} [main] INFO  com.ssa.ironyard.WeatherStarter - Starting WeatherStarter on PC45 with PID 1252 (C:\Users\admin\workspace\Microservice\target\classes started by admin in C:\Users\admin\workspace\Microservice)
+08:55:00.339} [main] DEBUG com.ssa.ironyard.WeatherStarter - Running with Spring Boot v1.4.0.RELEASE, Spring v4.3.2.RELEASE
+08:55:00.340} [main] INFO  com.ssa.ironyard.WeatherStarter - No active profile set, falling back to default profiles: default
+08:55:02.691} [main] INFO  com.ssa.ironyard.WeatherStarter - Started WeatherStarter in 2.607 seconds (JVM running for 9.08)
